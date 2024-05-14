@@ -4,15 +4,19 @@
 
 int main(void){
     for(;;){
+       
+        std::cout << "r: Read and process tag file\np: Print all tags\nd: Dump all tags to text file\nl: List all tags with their data\nq: Quit\n";
         std::string user_input;
         std::cout << "Enter an option (r,p,d,l) or q to quit, and press return..." << std::endl;
         std::cin >> user_input;
         if(user_input == "r"){
             std::string filename;
+            std::cout << "Enter filename: ";
             std::cin >> filename;
             extract_tags(filename);
         }
         else if (user_input == "p"){
+            std::cout << "print\n";
             print_tags();
         }
         else if(user_input == "d"){

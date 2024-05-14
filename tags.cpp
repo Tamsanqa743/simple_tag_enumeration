@@ -1,5 +1,6 @@
 #include "tags.h"
 #include <iostream>
+#include <fstream>
 
 std::vector<tag_struct> all_tags; // vector containing all tag structs
 
@@ -34,11 +35,24 @@ void list_tag_data(std::string tag_name){
  * extracts tags with their infomation and stores them in a vector
 */
 void extract_tags(std::string filename){
+    std::vector<std::string> file_data = read_file(filename);
+    std::cout << file_data[0];
 
 }
 
 void dump_tags(){
 
+}
+
+std::vector<std::string> read_file(std::string filename){
+    std::ifstream input_file_stream(filename);
+    std::vector<std::string> file_data;
+    std::string read_data;
+    while(std::getline(input_file_stream, read_data)){
+        file_data.push_back(read_data);
+    }
+
+    return file_data;
 }
 /*
  * clears the system terminal when called
