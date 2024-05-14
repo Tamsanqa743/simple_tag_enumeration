@@ -19,7 +19,7 @@ void list_tag_data(std::string tag_name); // prints out all data for specified t
 
 void extract_tags(std::string filename); // extracts tags with their infomation and stores them in a vector
 
-std::vector<std::string> read_file(std::string filename); // reads in file data
+void read_file(std::string filename); // reads in file data
 
 void clear(void); // clears terminal window
 

@@ -16,7 +16,6 @@ int main(void){
             extract_tags(filename);
         }
         else if (user_input == "p"){
-            std::cout << "print\n";
             print_tags();
         }
         else if(user_input == "d"){
@@ -24,6 +23,7 @@ int main(void){
         }
         else if(user_input == "l"){
             std::string tag_name;
+            std::cout << "Enter tag name: ";
             std::cin >> tag_name;
             list_tag_data(tag_name);
         }

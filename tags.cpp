@@ -3,6 +3,7 @@
 #include <fstream>
 
 std::vector<tag_struct> all_tags; // vector containing all tag structs
+std::vector<std::string> file_data; // vector to store lines from file
 
 /**
  * prints all tags and their data contained in the tags vector
@@ -35,24 +36,25 @@ void list_tag_data(std::string tag_name){
  * extracts tags with their infomation and stores them in a vector
 */
 void extract_tags(std::string filename){
-    std::vector<std::string> file_data = read_file(filename);
-    std::cout << file_data[0];
-
+    read_file(filename);
 }
 
 void dump_tags(){
-
+    std::ofstream output_file("tags.txt");
+    for(int i = 0; i < all_tags.size(); ++i){
+        output_file << all_tags[i].name << all_tags[i].number_of_pairs << all_tags[i].text;
+    }
 }
-
-std::vector<std::string> read_file(std::string filename){
+/**
+ * reads file data line by line and stores it in vector
+*/
+void read_file(std::string filename){
     std::ifstream input_file_stream(filename);
-    std::vector<std::string> file_data;
     std::string read_data;
     while(std::getline(input_file_stream, read_data)){
         file_data.push_back(read_data);
     }
-
-    return file_data;
+    input_file_stream.close(); // close file input stream
 }
 /*
  * clears the system terminal when called
