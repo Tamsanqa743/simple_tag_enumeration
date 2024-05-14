@@ -1,6 +1,8 @@
 #include "tags.h"
 #include <iostream>
 
+std::vector<tag_struct> all_tags; // vector containing all tag structs
+
 /**
  * prints all tags and their data contained in the tags vector
  * 
@@ -32,6 +34,10 @@ void list_tag_data(std::string tag_name){
  * extracts tags with their infomation and stores them in a vector
 */
 void extract_tags(std::string filename){
+
+}
+
+void dump_tags(){
 
 }
 /*

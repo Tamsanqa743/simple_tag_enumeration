@@ -11,8 +11,6 @@ struct tag_struct {
     std::string text;
 };
 
-std::vector<tag_struct> all_tags; // vector containing all tag structs
-
 void print_tags(void); // method that prints all tags
 
 void dump_tags(void); // method dumps all tags into a file called tag.txt
