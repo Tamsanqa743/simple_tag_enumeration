@@ -1,2 +1,2 @@
-<Tag>Hello there</Tag>
-<Tag2>How are you?</Tag2>
+<Tag>Hello</Tag>
+<Tag2>How</Tag2>

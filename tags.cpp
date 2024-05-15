@@ -37,12 +37,29 @@ void list_tag_data(std::string tag_name){
 */
 void extract_tags(std::string filename){
     read_file(filename);
+    for(int i = 0; i < file_data.size(); ++i){
+
+        std::string current_string = file_data[i];
+        tag_struct new_tag;
+        int opening_tag_index = current_string.find_first_of(">");
+        int closing_tag_index = current_string.find_last_of("<");
+
+        std::string new_tag_name = current_string.substr(1, opening_tag_index - 1);
+        std::string current_tag_text = current_string.substr(opening_tag_index + 1, closing_tag_index - opening_tag_index - 1);
+        for(int j = 0; j < all_tags.size(); ++j){
+            if(all_tags[j].name == new_tag_name){
+                // std::string temp_tag_text = all_tags[j] + ":" + current_tag_text;  append string
+                all_tags[0] = new_tag;
+                break;
+            }
+        }
+    }
 }
 
 void dump_tags(){
     std::ofstream output_file("tags.txt");
     for(int i = 0; i < all_tags.size(); ++i){
-        output_file << all_tags[i].name << all_tags[i].number_of_pairs << all_tags[i].text;
+        output_file << all_tags[i].name << all_tags[i].number_of_pairs << all_tags[i].text << std::endl;
     }
 }
 /**
