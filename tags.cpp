@@ -10,11 +10,13 @@ std::vector<std::string> file_data; // vector to store lines from file
  * 
 */
 void print_tags(void){
+    std::cout << "---------------------------\n";
     for(int i = 0; i < all_tags.size(); ++i){
         tag_struct current_tag = all_tags[i];
-        std::cout << current_tag.name << ", " << current_tag.number_of_pairs << ", " << current_tag.text;
+        std::cout << current_tag.name << "," << current_tag.number_of_pairs << "," << current_tag.text;
         std::cout << std::endl;
     }
+    std::cout << "---------------------------\n";
 }
 
 /**
@@ -22,13 +24,12 @@ void print_tags(void){
 */
 
 void list_tag_data(std::string tag_name){
+    std::cout << "---------------------------\n";
     for(int i = 0; i < all_tags.size(); ++i){
         if(all_tags[i].name == tag_name){
-            std::cout << all_tags[i].name << ", " << all_tags[i].number_of_pairs << ", " << all_tags[i].text;
+            std::cout << all_tags[i].name << "," << all_tags[i].number_of_pairs << "," << all_tags[i].text;
             std::cout << std::endl;
-        }
-        else{
-            std::cout << "The specified tag was not found!" << std::endl;
+            break;
         }
     }
 }
@@ -47,37 +48,43 @@ void extract_tags(std::string filename){
         std::string new_tag_name = current_string.substr(1, opening_tag_index - 1);
         std::string current_tag_text = current_string.substr(opening_tag_index + 1, closing_tag_index - opening_tag_index - 1);
 
-        if(all_tags.size() != 0){
+        if(all_tags.empty()){
+            new_tag.name = new_tag_name;
+            new_tag.number_of_pairs = 1;
+            new_tag.text = current_tag_text;
+            all_tags.push_back(new_tag);
+        }
+        else{
+            bool not_found = true;
             for(int j = 0; j < all_tags.size(); ++j){
                 if(all_tags[j].name == new_tag_name){
                     new_tag.text = all_tags[j].text + ":" + current_tag_text;
                     new_tag.number_of_pairs = all_tags[j].number_of_pairs + 1;
                     new_tag.name = new_tag_name;
                     all_tags[j] = new_tag;
-                    break;
+                    not_found = false;
+                    continue;
                 }
+
             }
-
-            new_tag.name = new_tag_name;
-            new_tag.number_of_pairs = 1;
-            new_tag.text = current_tag_text;
-            all_tags.push_back(new_tag); 
-
-        }
-        else{
-            new_tag.name = new_tag_name;
-            new_tag.number_of_pairs = 1;
-            new_tag.text = current_tag_text;
-            all_tags.push_back(new_tag);
+            // tag was not found in all_tags vector, add it to vector
+            if(not_found){
+                new_tag.name = new_tag_name;
+                new_tag.number_of_pairs = 1;
+                new_tag.text = current_tag_text;
+                all_tags.push_back(new_tag);
+            }
         }
     }
 }
 
 void dump_tags(){
+    std::cout << "Dumping tags..." << std::endl;
     std::ofstream output_file("tags.txt");
     for(int i = 0; i < all_tags.size(); ++i){
-        output_file << all_tags[i].name << ", " << all_tags[i].number_of_pairs << ", " << all_tags[i].text << std::endl;
+        output_file << all_tags[i].name << "," << all_tags[i].number_of_pairs << "," << all_tags[i].text << std::endl;
     }
+    std::cout << "Done!" << std::endl;
 }
 /**
  * reads file data line by line and stores it in vector
