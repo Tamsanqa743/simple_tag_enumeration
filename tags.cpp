@@ -46,12 +46,29 @@ void extract_tags(std::string filename){
 
         std::string new_tag_name = current_string.substr(1, opening_tag_index - 1);
         std::string current_tag_text = current_string.substr(opening_tag_index + 1, closing_tag_index - opening_tag_index - 1);
-        for(int j = 0; j < all_tags.size(); ++j){
-            if(all_tags[j].name == new_tag_name){
-                // std::string temp_tag_text = all_tags[j] + ":" + current_tag_text;  append string
-                all_tags[0] = new_tag;
-                break;
+
+        if(all_tags.size() != 0){
+            for(int j = 0; j < all_tags.size(); ++j){
+                if(all_tags[j].name == new_tag_name){
+                    new_tag.text = all_tags[j].text + ":" + current_tag_text;
+                    new_tag.number_of_pairs = all_tags[j].number_of_pairs + 1;
+                    new_tag.name = new_tag_name;
+                    all_tags[j] = new_tag;
+                    break;
+                }
             }
+
+            new_tag.name = new_tag_name;
+            new_tag.number_of_pairs = 1;
+            new_tag.text = current_tag_text;
+            all_tags.push_back(new_tag); 
+
+        }
+        else{
+            new_tag.name = new_tag_name;
+            new_tag.number_of_pairs = 1;
+            new_tag.text = current_tag_text;
+            all_tags.push_back(new_tag);
         }
     }
 }
@@ -59,7 +76,7 @@ void extract_tags(std::string filename){
 void dump_tags(){
     std::ofstream output_file("tags.txt");
     for(int i = 0; i < all_tags.size(); ++i){
-        output_file << all_tags[i].name << all_tags[i].number_of_pairs << all_tags[i].text << std::endl;
+        output_file << all_tags[i].name << ", " << all_tags[i].number_of_pairs << ", " << all_tags[i].text << std::endl;
     }
 }
 /**

@@ -1,2 +1,4 @@
 <Tag>Hello</Tag>
 <Tag2>How</Tag2>
+<Tag>There</Tag>
+<TXT>Testing Tags</TXT>
