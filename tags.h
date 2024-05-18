@@ -23,4 +23,5 @@ void read_file(std::string filename); // reads in file data
 
 void clear(void); // clears terminal window
 
+size_t find_tag(std::string tag_name);
 #endif

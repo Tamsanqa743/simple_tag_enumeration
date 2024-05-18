@@ -48,34 +48,37 @@ void extract_tags(std::string filename){
         std::string new_tag_name = current_string.substr(1, opening_tag_index - 1);
         std::string current_tag_text = current_string.substr(opening_tag_index + 1, closing_tag_index - opening_tag_index - 1);
 
-        if(all_tags.empty()){
-            new_tag.name = new_tag_name;
-            new_tag.number_of_pairs = 1;
-            new_tag.text = current_tag_text;
-            all_tags.push_back(new_tag);
-        }
-        else{
-            bool not_found = true;
-            for(int j = 0; j < all_tags.size(); ++j){
-                if(all_tags[j].name == new_tag_name){
-                    new_tag.text = all_tags[j].text + ":" + current_tag_text;
-                    new_tag.number_of_pairs = all_tags[j].number_of_pairs + 1;
-                    new_tag.name = new_tag_name;
-                    all_tags[j] = new_tag;
-                    not_found = false;
-                    continue;
-                }
+        new_tag.name = new_tag_name;
+        new_tag.number_of_pairs = 1;
+        new_tag.text = current_tag_text;
 
+        if(!all_tags.empty()){
+            
+            size_t tag_index = find_tag(new_tag_name);
+            if(tag_index < all_tags.size()){
+                all_tags[tag_index].number_of_pairs += 1;
+                all_tags[tag_index].text = all_tags[tag_index].text + ":" + current_tag_text;
             }
-            // tag was not found in all_tags vector, add it to vector
-            if(not_found){
-                new_tag.name = new_tag_name;
-                new_tag.number_of_pairs = 1;
-                new_tag.text = current_tag_text;
+            else{
                 all_tags.push_back(new_tag);
             }
         }
+        else{
+            all_tags.push_back(new_tag);
+        }
     }
+}
+
+size_t find_tag(std::string tag_name){
+    size_t index = -1;
+    if(all_tags.size() > 0){
+        for(size_t i = 0; i < all_tags.size(); ++i){
+            if(all_tags[i].name == tag_name){
+                index = i;
+            }
+        }
+    }
+    return index;
 }
 
 void dump_tags(){
