@@ -15,7 +15,9 @@ int main(void){
             std::cin >> filename;
             extract_tags(filename);
             read_file_to_stack(filename);
-            print_stack();
+            // print_stack();
+            extract_nested_tags(filename);
+            std::cout << (int)std::string("Hello").find("a") << std::endl;
         }
         else if (user_input == "p"){
             print_tags();

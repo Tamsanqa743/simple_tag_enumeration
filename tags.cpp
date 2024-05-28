@@ -112,11 +112,32 @@ void read_file_to_stack(std::string filename){
 }
 
 void extract_nested_tags(std::string filename){
+    while(!file_data_stack.empty()){
+        std::string current_tag = file_data_stack.top();
+        file_data_stack.pop();
 
+        int start_of_closing_tag = current_tag.find("</");
+        int start_of_opening_tag = current_tag.find_first_of(">");
+
+        if(start_of_closing_tag < start_of_opening_tag){
+            // closing tag at the start of text/string
+            std::cout << "Nested Tags: ";
+            std::cout << current_tag << std::endl;
+
+        }
+        else if(start_of_closing_tag > start_of_opening_tag){
+            // closing tag at the end of the text, therefore one tag type
+            std::cout << "Straigt tags: ";
+            std::cout << current_tag << std::endl;
+        }
+        else if(start_of_closing_tag == -1 && start_of_opening_tag == -1){
+            //tags not found in current text
+        }
+    }
 }
 
 void print_stack(){
-    std::cout << file_data_stack.top() << std::endl;
+    std::cout << file_data_stack.top().find("</") << std::endl;
 }
 /*
  * clears the system terminal when called
