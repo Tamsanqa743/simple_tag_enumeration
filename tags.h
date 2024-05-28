@@ -4,6 +4,8 @@
 #include <vector>
 #include <cstdlib>
 #include <string>
+#include <stack>
+
 
 struct tag_struct {
     std::string name;
@@ -24,4 +26,11 @@ void read_file(std::string filename); // reads in file data
 void clear(void); // clears terminal window
 
 size_t find_tag(std::string tag_name);
+
+void extract_nested_tags(std::string filename); // extracts tags including nested ones
+
+void read_file_to_stack(std::string filename); // stores file lines into stack
+
+void print_stack(); // test method to print stack
+
 #endif

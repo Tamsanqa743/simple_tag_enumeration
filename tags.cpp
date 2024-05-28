@@ -2,9 +2,10 @@
 #include <iostream>
 #include <fstream>
 
+
 std::vector<tag_struct> all_tags; // vector containing all tag structs
 std::vector<std::string> file_data; // vector to store lines from file
-
+std::stack<std::string> file_data_stack; // stack containg lines from file 
 /**
  * prints all tags and their data contained in the tags vector
  * 
@@ -99,6 +100,23 @@ void read_file(std::string filename){
         file_data.push_back(read_data);
     }
     input_file_stream.close(); // close file input stream
+}
+
+void read_file_to_stack(std::string filename){
+    std::ifstream input_file_stream(filename);
+    std::string read_data;
+    while(std::getline(input_file_stream, read_data)){
+        file_data_stack.push(read_data);
+    }
+    input_file_stream.close(); // close file input stream
+}
+
+void extract_nested_tags(std::string filename){
+
+}
+
+void print_stack(){
+    std::cout << file_data_stack.top() << std::endl;
 }
 /*
  * clears the system terminal when called

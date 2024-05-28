@@ -14,6 +14,8 @@ int main(void){
             std::cout << "Enter filename: ";
             std::cin >> filename;
             extract_tags(filename);
+            read_file_to_stack(filename);
+            print_stack();
         }
         else if (user_input == "p"){
             print_tags();
