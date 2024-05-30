@@ -13,11 +13,12 @@ int main(void){
             std::string filename;
             std::cout << "Enter filename: ";
             std::cin >> filename;
-            extract_tags(filename);
-            read_file_to_stack(filename);
+            read_file(filename);
+            // extract_tags(filename);
+            // read_file_to_stack(filename);
             // print_stack();
-            extract_nested_tags(filename);
-            std::cout << (int)std::string("Hello").find("a") << std::endl;
+            // extract_nested_tags(filename);
+            process_tags();
         }
         else if (user_input == "p"){
             print_tags();

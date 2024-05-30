@@ -33,4 +33,8 @@ void read_file_to_stack(std::string filename); // stores file lines into stack
 
 void print_stack(); // test method to print stack
 
+void process_string(std::string current_string);
+
+void process_tags();
+
 #endif
