@@ -4,7 +4,6 @@
 
 
 std::vector<tag_struct> all_tags; // vector containing all tag structs
-std::vector<std::string> file_data; // vector to store lines from file
 std::stack<std::string> tag_names_stack; // name of tags not fully processed
 /**
  * prints all tags and their data contained in the tags vector
