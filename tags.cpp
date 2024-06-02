@@ -130,8 +130,7 @@ void process_tag(std::string current_string){
         //tags not found in current text
         std::string tag_name = tag_names_stack.top(); // read tag from stack
         int tag_index = find_tag(tag_name);
-        all_tags[tag_index].number_of_pairs = all_tags[tag_index].number_of_pairs + 1;
-        all_tags[tag_index].text = all_tags[tag_index].text  + current_string;
+        all_tags[tag_index].text = (all_tags[tag_index].text == "" ? current_string : all_tags[tag_index].text + " " + current_string);
     }
     else if(closing_tag_start_index == -1 && opening_tag_end_index != -1){
         // only opening tag in string
