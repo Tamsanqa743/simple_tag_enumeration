@@ -27,6 +27,6 @@ size_t find_tag(std::string tag_name);
 
 void process_string(std::string current_string);
 
-void process_tags();
+void process_tag(std::string current_string);
 
 #endif
